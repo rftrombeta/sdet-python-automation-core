@@ -1,51 +1,160 @@
-# Library (lib_name)
-***
+# 🧱 SDET Python Automation Core
 
-## Introdução
+Framework **core reutilizável** para automação de testes, projetado para cenários **SDET / QA Automation Engineering**, com foco em **arquitetura limpa, desacoplamento e reuso**.
 
-A library **lib_name** pode ser utilizada com o intuito de melhorar o trabalho do time de automação, minimizando o tempo de manutenção em funções auxiliares, evitando duplicidades e organizando-as em um único repositório.
+Este projeto é consumido via **pip** por projetos de automação (ex: Robot Framework), sem cópia de código ou dependência manual.
 
-Além de organizar as funções, a library também pode ser responsável por controlar as dependências do projeto de automação, 
-evitando dependências em diferentes versões.\
+---
 
-Sendo assim, havendo a necessidade de criar novas funções para serem utilizadas nos projetos de automação, o responsável deverá entender se faz sentido a utilização em outros projetos, 
-incluindo na lib caso faça, assim, todos podem fazer a utilização das mesmas de forma unificada.
-***
+## 🎯 Objetivo
 
-## Instalação
->A instalação da lib no projeto de automação com Robot Framework poderá ser feita através do pip install.
-> 
-> [Incluir aqui os links de ajuda, caso tenha](https://github.com/rftrombeta/lib-python-robot-framework)
-***
+Este framework tem como objetivo:
 
-## Links Uteis 
-Segue abaixo alguns links importantes para a correta utilização e conhecimento da lib: 
+* Centralizar lógica técnica de automação (HTTP, contexto, configurações)
+* Expor **libraries reutilizáveis** para ferramentas de teste
+* Suportar projetos Robot Framework desacoplados
+* Permitir versionamento e releases independentes
+* Servir como base para automação de API e integrações futuras
 
-1. [Release Notes](release-notes.md)
-2. [Documentação Funcional](documentação-funcional.md)
-***
+---
 
-## Comandos uteis para desenvolver na lib
+## 🏗 Arquitetura do Framework
 
-> **Rodar os testes**\
-> Após finalizar o desenvolvimento, a execução local para testes poderá ser feita utilizando o exemplo de comando abaixo:
-> * python -m src.function_package.my_function.py
->   * Também é possível acrescentar argumentos acrescentando **env:**
+![Arquitetura do Automation Core](docs/architecture-diagram.png)
 
-> **Buildar projeto para teste**\
-> Após finalizar os testes, podemos gerar um pacote da lib para instalação nos demais projetos utilizando o comando 
-> ```python -m build```. 
-> * Esse comando criará uma pasta chamada **dist** com um arquivo ```tar.gz``` que poderá ser utilizado para instalação no projeto.
-> * ```pip install lib_name-1.1.1.tar.gz``` 
-***
-## Files from Lib
-### setup.py
-Esse arquivo é o responsável por realizar o controle da lib, como descrição, diretórios, versões e suas dependências.\
-Todas as dependências incluídas no setup.py serão instaladas como dependência do projeto de automação no momento em que a lib for instalada.\
-Dessa forma, o projeto de automação não precisará de um arquivo ```requirements.txt``` específico.
+Este projeto representa o **core reutilizável de automação**, desacoplado de qualquer ferramenta de execução,
+permitindo integração com Robot Framework, Pytest ou outros consumidores.
 
-### packages python
-Dentro dos respectivos pacotes, teremos os arquivos python contendo com as respectivas funções. Essas funções poderão ser 
-apenas para utilização interna da lib, servindo de apoio para outras funções, ou, serão utilizadas nos projetos de automação,
-nesse caso, devendo ser incluídas nos respectivos arquivos de inicialização ```__init__.py```, como demonstrado abaixo:
-> from my_function import (function_one)
+## 🧱 Arquitetura
+
+```text
+sdet-python-automation-core
+│
+├── src/
+│   └── sdet_python_automation_core/
+│       ├── core/
+│       │   └── context/
+│       │       └── execution_context.py
+│       │
+│       ├── services/
+│       │   └── http/
+│       │       ├── http_client.py
+│       │       └── http_response.py
+│       │
+│       ├── libraries/
+│       │   └── base_library.py
+│       │
+│       └── __init__.py
+│
+├── pyproject.toml
+└── README.md
+```
+
+### 🔗 Responsabilidades por camada
+
+| Camada      | Responsabilidade                                |
+| ----------- | ----------------------------------------------- |
+| `services`  | Implementação técnica (HTTP, integrações)       |
+| `core`      | Contexto e controle de estado de execução       |
+| `libraries` | Exposição de keywords para ferramentas de teste |
+
+---
+
+## 🌐 HttpClient
+
+O `HttpClient` encapsula o uso do `requests` e fornece:
+
+* Session reutilizável
+* Retry automático (5xx)
+* Timeout configurável
+* Abstração de resposta (`HttpResponse`)
+
+```python
+client = HttpClient(base_url="https://api.example.com")
+response = client.get("/health")
+```
+
+---
+
+## 🤖 Integração com Robot Framework
+
+A integração ocorre através da **BaseLibrary**, que expõe keywords reutilizáveis:
+
+```robot
+Create HTTP Client    https://api.example.com
+GET                   /users
+Status Should Be      200
+```
+
+A library mantém estado interno através do `ExecutionContext`, garantindo controle sobre:
+
+* Cliente HTTP ativo
+* Última resposta
+* Expansão futura (auth, headers, ambientes)
+
+---
+
+## 📦 Instalação
+
+### Via pip (GitHub)
+
+```bash
+pip install git+https://github.com/rftrombeta/sdet-python-automation-core.git@v0.0.1
+```
+
+### Durante desenvolvimento
+
+```bash
+pip install -e .
+```
+
+---
+
+## 🔖 Versionamento
+
+Este projeto segue **Semantic Versioning**:
+
+```text
+MAJOR.MINOR.PATCH
+```
+
+* `main` → versões estáveis
+* `develop` → desenvolvimento contínuo
+
+Releases são criadas via **GitHub Tags**.
+
+---
+
+## 🔗 Projetos que utilizam este core
+
+* **SDET Robot Automation Project**
+  [https://github.com/rftrombeta/sdet-robot-automation-project](https://github.com/rftrombeta/sdet-robot-automation-project)
+
+---
+
+## 🧠 Conceitos aplicados
+
+* SDET Architecture
+* Framework desacoplado
+* Core versionado e reutilizável
+* Integração via pip
+* Separação entre testes e implementação
+
+---
+
+## 👤 Autor
+
+**Rodrigo Trombeta**
+QA SDET • Automação • IA
+
+* LinkedIn: [https://www.linkedin.com/in/rodrigo-trombeta-21b89252](https://www.linkedin.com/in/rodrigo-trombeta-21b89252)
+* GitHub: [https://github.com/rftrombeta](https://github.com/rftrombeta)
+
+---
+
+## 🚀 Próximos passos
+
+* Config Loader (YAML + ENV)
+* Autenticação (Bearer / OAuth)
+* Logging estruturado
+* Validações JSON como keywords
