@@ -1,0 +1,10 @@
+## ⚙️ Configuração (YAML)
+
+O core utiliza arquivos YAML para centralizar configurações técnicas.
+
+Exemplo:
+
+```yaml
+http:
+  timeout: 30
+  verify_ssl: true
