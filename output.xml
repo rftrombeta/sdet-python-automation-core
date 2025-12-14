@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4 (Python 3.12.3 on linux)" generated="2025-12-14T03:01:08.808347" rpa="false" schemaversion="5">
+<suite id="s1" name="Api Example" source="/home/rftrombeta/Git/sdet-python-automation-core/tests/api_example.robot">
+<test id="s1-t1" name="Get Post Example" line="5">
+<kw name="Create HTTP Client" owner="sdet_python_automation_core.libraries.base_library.BaseLibrary">
+<arg>https://jsonplaceholder.typicode.com</arg>
+<doc>Creates and stores a HTTP client instance</doc>
+<status status="PASS" start="2025-12-14T03:01:08.884368" elapsed="0.000593"/>
+</kw>
+<kw name="GET" owner="sdet_python_automation_core.libraries.base_library.BaseLibrary">
+<arg>/posts/1</arg>
+<status status="PASS" start="2025-12-14T03:01:08.885237" elapsed="0.128205"/>
+</kw>
+<kw name="Status Should Be" owner="sdet_python_automation_core.libraries.base_library.BaseLibrary">
+<arg>200</arg>
+<status status="PASS" start="2025-12-14T03:01:09.013716" elapsed="0.000172"/>
+</kw>
+<status status="PASS" start="2025-12-14T03:01:08.883513" elapsed="0.130561"/>
+</test>
+<status status="PASS" start="2025-12-14T03:01:08.809378" elapsed="0.206159"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Api Example" id="s1" pass="1" fail="0" skip="0">Api Example</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
