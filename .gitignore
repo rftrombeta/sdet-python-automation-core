@@ -20,10 +20,10 @@ __pycache__
 # Project
 .env
 .venv
-*.html
 
 # Crash log files
 crash.log
+*.html
 
 override.tf
 override.tf.json
