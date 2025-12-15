@@ -1,2 +1,0 @@
-sdet_python_automation_core
-util

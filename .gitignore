@@ -20,6 +20,7 @@ __pycache__
 # Project
 .env
 .venv
+src/sdet_python_automation_core.egg-info
 
 # Crash log files
 crash.log

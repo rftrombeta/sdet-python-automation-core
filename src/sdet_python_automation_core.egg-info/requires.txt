@@ -1,9 +1,0 @@
-robotframework>=6.0
-requests>=2.31
-pyyaml>=6.0
-
-[dev]
-pytest
-black
-ruff
-mypy
