@@ -1,6 +1,0 @@
-# settings.yaml
-http:
-  timeout: 30
-  verify_ssl: true
-logging:
-  level: INFO
