@@ -4,11 +4,11 @@ from sdet_python_automation_core.core.config.loader import ConfigLoader
 
 
 class BaseLibrary:
-    ROBOT_LIBRARY_SCOPE = "SUITE"
-
     def __init__(self):
         self.client = None
         self.last_response = None
+        self.user_email = None
+        self.user_password = "123456"
 
     @keyword("Create HTTP Client From Config")
     def create_http_client_from_config(self):
