@@ -1,147 +1,88 @@
-# SDET Python Automation Core
+# SDET Python Automation Core 🚀
 
-Core de automação em Python projetado para ser reutilizável, desacoplado e
-consumido por frameworks de testes como Robot Framework, Playwright ou testes
-diretos em Python.
+Este projeto é uma biblioteca core de automação desenvolvida em Python, projetada para ser o motor técnico de projetos de teste. Ela fornece utilitários de rede, gerenciamento de configuração, geradores de massa de dados e integração facilitada com o **Robot Framework**.
 
-Este projeto representa a camada central de uma arquitetura SDET moderna,
-onde a lógica técnica de automação não fica acoplada ao framework de testes.
+## 🛠️ Tecnologias Principais
 
----
-
-## 🧠 Visão Geral da Arquitetura
-
-![Arquitetura de Automação](docs/architecture-diagram.png)
-
-A arquitetura é composta por três camadas principais:
-
-- **Framework de Testes** (ex: Robot Framework)
-- **Library de Keywords** (BaseLibrary)
-- **Automation Core** (este repositório)
-
-O core é responsável por:
-- Comunicação HTTP
-- Abstração de respostas
-- Configuração centralizada
-- Regras técnicas reutilizáveis
+- **Python 3.9+**
+- **Requests:** Comunicação HTTP.
+- **PyYAML:** Gestão de configurações por ambiente.
+- **Faker:** Geração de massa de dados aleatórios.
+- **Robot Framework:** Orquestração de testes (opcional).
 
 ---
 
-## 🎯 Objetivos do Projeto
+## 💻 Instalação e Configuração
 
-- Separar lógica técnica do framework de testes
-- Permitir reutilização entre múltiplos projetos
-- Facilitar manutenção e evolução
-- Suportar versionamento e distribuição via pip
-- Seguir princípios SDET e Clean Architecture
+Siga os passos abaixo para preparar seu ambiente de desenvolvimento após a formatação ou ao clonar o projeto.
 
----
+### 1. Pré-requisitos
 
-## 📁 Estrutura do Projeto
+Certifique-se de ter o Python instalado. Verifique no terminal:
 
-src/
-└── sdet_python_automation_core/
-├── core/
-│ └── config/
-│ └── loader.py
-├── services/
-│ └── http/
-│ ├── http_client.py
-│ └── http_response.py
-├── libraries/
-│ └── base_library.py
-└── init.py
+```bash
+python --version
+```
 
----
+### 2. Criação do Ambiente Virtual (VENV)
+Recomendamos o uso de um ambiente isolado para evitar conflitos de dependências:
 
-## 📌 Descrição das Camadas
+Bash
 
-### **core**
-Componentes fundamentais do projeto, como carregamento de configurações e
-funcionalidades compartilhadas.
+# Crie o ambiente virtual
+python -m venv .venv
 
-### **services**
-Implementações técnicas reutilizáveis (ex: comunicação HTTP, parsing de resposta,
-futuras integrações).
+# Ative o ambiente (Windows)
+.\.venv\Scripts\activate
 
-### **libraries**
-Camada exposta para frameworks de testes como Robot Framework, traduzindo
-funcionalidades do core em keywords.
+# Ative o ambiente (Linux/Mac)
+source .venv/bin/activate
 
----
+### 3. Instalação do Projeto
+Para desenvolvedores que irão modificar o core, utilize a instalação em modo editável. Isso garante que suas alterações reflitam instantaneamente sem necessidade de reinstalação.
 
-## ⚙️ Configuração via YAML (Opcional)
+Bash
 
-O core suporta configuração externa via arquivos YAML para evitar valores
-hardcoded no código e facilitar a reutilização entre ambientes.
+# Instala as dependências base, de dev e suporte ao Robot
+pip install -e ".[dev,robot]"
+🏗️ Estrutura do Projeto
+O projeto segue uma arquitetura desacoplada:
 
-📌 **O arquivo YAML não faz parte do core**  
-📌 Ele normalmente fica no **projeto consumidor** (ex: projeto Robot Framework)
+src/sdet_core/utils: Componentes puros (HTTP Client, Config Loader, Data Generator).
 
-### Exemplo de arquivo YAML
+src/sdet_core/services: Lógica de negócio (ex: integração com a API ServeRest).
 
-```yaml
-http:
-  base_url: https://jsonplaceholder.typicode.com
-  timeout: 30
-  verify_ssl: true
-Exemplo de carregamento no código
-python
-Copy code
-from sdet_python_automation_core.core.config.loader import load_config
+src/sdet_core/bridge: Adaptadores que expõem as funções como Keywords para o Robot Framework.
 
-config = load_config("settings.yaml")
-🧪 Testes
-Este projeto contém testes unitários para validar os principais componentes do core.
+🚀 Como Usar
+Exemplo em Python Puro
+Ideal para scripts utilitários ou integração com Pytest:
 
-Executar testes
-bash
-Copy code
-pytest
-📦 Instalação
-Modo desenvolvimento
-bash
-Copy code
-pip install -e .
-Uso como dependência em outro projeto
-bash
-Copy code
-pip install git+https://github.com/rftrombeta/sdet-python-automation-core.git@v0.1.0
-🤖 Integração com Robot Framework
-Este core foi projetado para ser consumido por Robot Framework através de uma
-Library Python.
+Python
 
-Exemplo de import no Robot Framework:
+from sdet_core.services.serverest_service import ServeRestService
 
-robot
-Copy code
-Library    sdet_python_automation_core.libraries.base_library.BaseLibrary
-A partir disso, as keywords Python ficam disponíveis para os testes.
+service = ServeRestService()
+service.autenticar_e_salvar_sessao("admin@serverest.com.br", "teste")
+usuarios = service.listar_usuarios()
+Exemplo no Robot Framework
+Importe a biblioteca e utilize as keywords semânticas:
 
-🧩 Exemplo de Uso em Python
-python
-Copy code
-from sdet_python_automation_core.services.http.http_client import HttpClient
+Snippet de código
 
-client = HttpClient(base_url="https://jsonplaceholder.typicode.com")
-response = client.get("/posts/1")
+*** Settings ***
+Library    sdet_core.bridge.ServeRestKeywords
 
-print(response.status_code)
-print(response.json())
-🚀 Roadmap
- Versionamento semântico
+*** Test Cases ***
+Cenário: Listagem de usuários
+    Autenticar No Sistema    admin@serverest.com.br    teste
+    ${lista}    Obter Lista De Usuarios
+⚙️ Configuração de Ambientes
+O core utiliza o arquivo config.yaml para alternar entre ambientes. Para mudar o alvo dos testes sem alterar o código, utilize variáveis de ambiente:
 
- Publicação no PyPI
+Bash
 
- Suporte a autenticação (OAuth / JWT)
-
- Observabilidade e logs
-
- Integração com outros protocolos
-
-👨‍💻 Autor
-Rodrigo Trombeta
-QA SDET | Automação | Arquitetura de Testes
-
-LinkedIn: https://www.linkedin.com/in/rodrigo-trombeta-21b89252/
-GitHub: https://github.com/rftrombeta
+# No terminal antes de rodar os testes
+export TEST_ENV=hml  # No Linux/Mac
+set TEST_ENV=hml     # No Windows
+```

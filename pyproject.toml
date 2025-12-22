@@ -1,27 +1,21 @@
 [project]
 name = "sdet-python-automation-core"
 version = "0.1.0"
-description = "Reusable automation core for SDET projects"
-readme = "README.md"
-requires-python = ">=3.9"
-authors = [
-  { name="Rodrigo Trombeta", email="rftrombeta@gmail.com" }
-]
+description = "Projeto Core para Automação com Robot"
 
 dependencies = [
-  "robotframework>=6.0",
   "requests>=2.31",
   "pyyaml>=6.0"
 ]
 
 [project.optional-dependencies]
+# Aqui permitimos que o Core tenha "superpoderes" para o Robot se solicitado
+robot = [
+  "robotframework>=6.0"
+]
 dev = [
   "pytest",
   "black",
   "ruff",
   "mypy"
 ]
-
-[build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
