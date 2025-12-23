@@ -1,5 +1,4 @@
 import random
-from ..requests import get_help
 
 
 class GenerateCnpjCpf:
@@ -42,11 +41,7 @@ def generate_cnpj():
     :rtype: str
     :raises Exception: Se não for possível encontrar um CNPJ que não esteja na base de controle.
     """
-    for _ in range(10):
-        cnpj = GenerateCnpjCpf.new_cnpj()
-        if get_help.get_document_number_cache_base_control(cnpj) == 204:
-            return cnpj
-    raise Exception('Failed to find a CNPJ not in the control base. Please try again!')
+    return GenerateCnpjCpf.new_cnpj()
 
 
 def generate_cpf():
@@ -57,8 +52,4 @@ def generate_cpf():
     :rtype: str
     :raises Exception: Se não for possível encontrar um CPF que não esteja na base de controle.
     """
-    for _ in range(10):
-        cpf = GenerateCnpjCpf.new_cpf()
-        if get_help.get_document_number_cache_base_control(cpf) == 204:
-            return cpf
-    raise Exception('Failed to find a CPF not in the control base. Please try again!')
+    return GenerateCnpjCpf.new_cpf()
