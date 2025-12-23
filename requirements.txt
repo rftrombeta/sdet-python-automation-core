@@ -1,0 +1,8 @@
+build
+curlify
+dateutils
+python-dotenv
+pytz
+requests
+setuptools
+xmltodict
