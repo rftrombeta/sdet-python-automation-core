@@ -1,11 +1,8 @@
 from datetime import datetime
-from dotenv import load_dotenv
 from pytz import timezone
 import json
 import os
 import re
-import sys
-import unicodedata
 
 path = os.getcwd()
 base_path = f"{path}/src/utils/" if "qa-libs-auto-api" in path else f"{path}/utils/"
