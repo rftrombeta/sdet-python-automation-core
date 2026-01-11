@@ -1,10 +1,10 @@
 class DictionaryUsers(dict):
 
     @staticmethod
-    def dict_users(name: str, email: str, password: str, administrator: str):
+    def dict_users(nome: str, email: str, password: str, administrador: str):
         return DictionaryUsers({
-            "nome": name,
+            "nome": nome,
             "email": email,
             "password": password,
-            "administrador": administrator
+            "administrador": administrador
         })
