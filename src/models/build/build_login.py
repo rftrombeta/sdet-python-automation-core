@@ -5,8 +5,6 @@ import json
 class BuildLogin:
 
     @staticmethod
-    def build_payload(dict_params):
+    def build_payload():
 
-        payload = DictionaryLogin.dict_login(dict_params["email"], dict_params["password"])
-
-        return json.loads(json.dumps(payload))
+        return json.loads(json.dumps(DictionaryLogin.dict_login()))

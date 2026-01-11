@@ -5,13 +5,6 @@ import json
 class BuildUsers:
 
     @staticmethod
-    def build_payload(dict_params):
+    def build_payload():
 
-        payload = DictionaryUsers.dict_users(
-            dict_params["nome"],
-            dict_params["email"],
-            dict_params["password"],
-            dict_params["administrador"]
-        )
-
-        return json.loads(json.dumps(payload))
+        return json.loads(json.dumps(DictionaryUsers.dict_users()))
