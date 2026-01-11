@@ -1,6 +1,7 @@
 build
 curlify
 dateutils
+faker
 python-dotenv
 pytz
 requests

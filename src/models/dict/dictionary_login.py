@@ -1,4 +1,5 @@
-from fakers import generate_email
+from faker import Faker
+fake = Faker('pt_BR')
 
 
 class DictionaryLogin(dict):
@@ -9,9 +10,7 @@ class DictionaryLogin(dict):
         Retorna um dicionário de login. Se `email` for None ou vazio,
         gera um e-mail aleatório usando `generate_email`.
         """
-        if not email:
-            email = generate_email()
         return DictionaryLogin({
-            "email": generate_email(),
-            "password": password
+            "email": fake.email(),
+            "password": fake.password()
         })

@@ -1,10 +1,14 @@
+from faker import Faker
+fake = Faker('pt_BR')
+
+
 class DictionaryUsers(dict):
 
     @staticmethod
-    def dict_users(nome: str, email: str, password: str, administrador: str):
+    def dict_users():
         return DictionaryUsers({
-            "nome": nome,
-            "email": email,
-            "password": password,
-            "administrador": administrador
+            "nome": fake.full_name(),
+            "email": fake.email(),
+            "password": fake.password(),
+            "administrador": fake.boolean()
         })
