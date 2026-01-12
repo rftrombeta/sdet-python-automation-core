@@ -22,6 +22,7 @@ setup(
                       'curlify',
                       'dateutils',
                       'faker',
+                      'mimesis',
                       'pytz',
                       'python-dotenv',
                       'robotframework',

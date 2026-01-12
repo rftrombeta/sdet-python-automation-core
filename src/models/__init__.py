@@ -1,2 +1,3 @@
 from .login import (create_payload_login)
-from .users import (create_payload_users)
+from .usuarios import (create_payload_usuario)
+from .produtos import (create_payload_produto)
