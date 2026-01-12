@@ -7,8 +7,8 @@ class DictionaryUsers(dict):
     @staticmethod
     def dict_users():
         return DictionaryUsers({
-            "nome": fake.full_name(),
+            "nome": fake.name(),
             "email": fake.email(),
             "password": fake.password(),
-            "administrador": fake.boolean()
+            "administrador": "false"
         })
