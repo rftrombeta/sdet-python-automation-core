@@ -7,4 +7,4 @@ class BuildUsuarios:
     @staticmethod
     def build_payload():
 
-        return json.loads(json.dumps(DictionaryUsuarios.dict_users()))
+        return json.loads(json.dumps(DictionaryUsuarios.dict_usuarios()))
