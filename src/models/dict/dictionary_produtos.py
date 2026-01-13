@@ -10,9 +10,10 @@ class DictionaryProdutos(dict):
 
     @staticmethod
     def dict_produtos():
+        preco = round(random.uniform(1000, 5000))
         return DictionaryProdutos({
-            "nome": generic.hardware.cpu(),
-            "preco": round(random.uniform(1000, 5000)),
+            "nome": generic.hardware.cpu() + str(preco),
+            "preco": preco,
             "descricao": generic.text.title(),
             "quantidade": round(random.uniform(5, 10))
         })
