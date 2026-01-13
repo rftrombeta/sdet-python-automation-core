@@ -12,7 +12,7 @@ class DictionaryProdutos(dict):
     def dict_produtos():
         preco = round(random.uniform(1000, 5000))
         return DictionaryProdutos({
-            "nome": generic.hardware.cpu() + str(preco),
+            "nome": f"{generic.hardware.cpu()} - R${preco}",
             "preco": preco,
             "descricao": generic.text.title(),
             "quantidade": round(random.uniform(5, 10))
