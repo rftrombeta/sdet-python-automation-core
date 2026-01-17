@@ -32,11 +32,11 @@ def generate_identifier_reference(descryption=""):
     Returns
     -------
     str
-        Uma sequência alfanumérica com a palavra "ROBOT-" como prefixo.
+        Uma sequência alfanumérica.
     """
     result_str = ''.join(random.choice(string.ascii_uppercase) for _ in range(3))
     result_num = random.randint(1000, 9999)
-    return f"{descryption}ROBOT-{str(result_num)}-{result_str}"
+    return f"{descryption}-{str(result_num)}-{result_str}"
 
 
 def generate_num_ref():
