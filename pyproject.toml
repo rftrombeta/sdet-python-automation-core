@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sdet-python-automation-core"
+version = "0.1.0"
+description = "Core library para automação SDET com Models e Helpers"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "Rodrigo Trombeta" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+    "requests",          # Base para os futuros API Clients
+    "pydantic",          # Para os Models e validação de contratos (PEP 589)
+    "faker",             # Para geração de massa de dados randômica
+    "python-dotenv",     # Para gerenciar variáveis de ambiente (.env)
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["automation_core*"]

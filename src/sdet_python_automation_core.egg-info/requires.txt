@@ -1,0 +1,4 @@
+requests
+pydantic
+faker
+python-dotenv
