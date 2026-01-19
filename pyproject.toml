@@ -19,6 +19,7 @@ dependencies = [
     "requests",          # Base para os futuros API Clients
     "pydantic",          # Para os Models e validação de contratos (PEP 589)
     "faker",             # Para geração de massa de dados randômica
+    "mimesis",           # Para geração de dados aleatórios localizados
     "python-dotenv",     # Para gerenciar variáveis de ambiente (.env)
 ]
 

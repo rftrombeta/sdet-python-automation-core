@@ -1,9 +1,10 @@
 import random
 import string
 import uuid
+from typing import Optional
 
 
-def generate_identifier_code_random(quantidade=6):
+def generate_identifier_code_random(quantidade: int = 6) -> str:
     """
     Gera um código identificador aleatório composto por dígitos.
 
@@ -20,7 +21,7 @@ def generate_identifier_code_random(quantidade=6):
     return ''.join(str(random.randint(0, 9)) for _ in range(quantidade))
 
 
-def generate_identifier_reference(descryption=""):
+def generate_identifier_reference(descryption: str = "") -> str:
     """
     Gera uma sequência alfanumérica com uma descrição especificada.
 
@@ -39,7 +40,7 @@ def generate_identifier_reference(descryption=""):
     return f"{descryption}-{str(result_num)}-{result_str}"
 
 
-def generate_num_ref():
+def generate_num_ref() -> str:
     """
     Gera uma sequência de inteiros de 32 bits aleatória.
 
@@ -51,7 +52,7 @@ def generate_num_ref():
     return str(random.getrandbits(32))
 
 
-def generate_uuid4():
+def generate_uuid4() -> str:
     """
     Gera um identificador único universal (UUID) de 128 bits.
 

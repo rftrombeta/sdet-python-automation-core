@@ -1,10 +1,11 @@
 import random
+from typing import Optional
 
 
 class GenerateCnpjCpf:
 
     @staticmethod
-    def new_cpf():
+    def new_cpf() -> str:
         """
         Gera um novo CPF (Cadastro de Pessoas Físicas) aleatório.
 
@@ -18,7 +19,7 @@ class GenerateCnpjCpf:
         return "".join(str(x) for x in cpf)
 
     @staticmethod
-    def new_cnpj():
+    def new_cnpj() -> str:
         """
         Gera um novo CNPJ (Cadastro Nacional da Pessoa Jurídica) aleatório.
 
@@ -33,23 +34,25 @@ class GenerateCnpjCpf:
         return "".join(str(x) for x in cnpj)
 
 
-def generate_cnpj():
+def generate_cnpj() -> str:
     """
     Gera um número de CNPJ válido e aleatório que não está na base de controle.
 
-    :return: Um número de CNPJ válido sem formatação.
-    :rtype: str
-    :raises Exception: Se não for possível encontrar um CNPJ que não esteja na base de controle.
+    Returns
+    -------
+    str
+        Um número de CNPJ válido sem formatação.
     """
     return GenerateCnpjCpf.new_cnpj()
 
 
-def generate_cpf():
+def generate_cpf() -> str:
     """
     Gera um número de CPF válido e aleatório que não está na base de controle.
 
-    :return: Um número de CPF válido sem formatação.
-    :rtype: str
-    :raises Exception: Se não for possível encontrar um CPF que não esteja na base de controle.
+    Returns
+    -------
+    str
+        Um número de CPF válido sem formatação.
     """
     return GenerateCnpjCpf.new_cpf()

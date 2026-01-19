@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta
 from random import choice
+from typing import Literal
 
 
-def generate_current_date():
+def generate_current_date() -> str:
     """
     Retorna a data atual no formato yyyy-mm-dd.
 
@@ -12,7 +13,7 @@ def generate_current_date():
     return datetime.now().astimezone().strftime('%Y-%m-%d')
 
 
-def generate_current_date_hour():
+def generate_current_date_hour() -> str:
     """
     Retorna a data e hora atual no formato yyyy-mm-dd hh:mm:ss.f.
 
@@ -22,7 +23,7 @@ def generate_current_date_hour():
     return datetime.now().astimezone().strftime('%Y-%m-%d %H:%M:%S.%f')
 
 
-def generate_date_plus_n_days(days):
+def generate_date_plus_n_days(days: int) -> str:
     """
     Gera uma data adicionando uma quantidade especificada de dias à data atual.
 
@@ -34,7 +35,7 @@ def generate_date_plus_n_days(days):
     return (datetime.now() + timedelta(int(days))).astimezone().strftime('%Y-%m-%d')
 
 
-def generate_date_minus_n_days(days):
+def generate_date_minus_n_days(days: int) -> str:
     """
     Gera uma data subtraindo uma quantidade especificada de dias da data atual.
 
@@ -46,7 +47,7 @@ def generate_date_minus_n_days(days):
     return (datetime.now() - timedelta(int(days))).astimezone().strftime('%Y-%m-%d')
 
 
-def increment_date_n_days(date, days):
+def increment_date_n_days(date: str, days: int) -> str:
     """
     Incrementa uma data fornecida por uma quantidade especificada de dias.
 
@@ -61,7 +62,7 @@ def increment_date_n_days(date, days):
     return new_date.astimezone().strftime('%Y-%m-%d')
 
 
-def generate_randon_date(date_format="yyyy-mm-dd"):
+def generate_randon_date(date_format: Literal["yyyy-mm-dd", "yyyy-mm"] = "yyyy-mm-dd") -> str:
     """
     Gera uma data aleatória.
 

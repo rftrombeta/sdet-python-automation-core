@@ -3,11 +3,12 @@ from pytz import timezone
 import json
 import os
 import re
+from typing import Dict, Any, Optional
 
 path = os.getcwd()
 base_path = f"{path}/src/utils/" if "qa-libs-auto-api" in path else f"{path}/utils/"
 
-def get_hour_now():
+def get_hour_now() -> str:
     """
     Obtém a hora atual para inserir no relatório do slack.
 
@@ -19,7 +20,7 @@ def get_hour_now():
     return datetime.now().astimezone(timezone('Etc/GMT+3')).strftime('%H:%M:%S')
 
 
-def convert_response_json(response):
+def convert_response_json(response: str) -> Dict[str, Any]:
     """
     Recebe um response formatado com apóstrofo para conversão em json.
 
@@ -36,7 +37,7 @@ def convert_response_json(response):
     return json.loads(response, strict=False)
 
 
-def replace_string_patterns(string_original, pattern, replacement):
+def replace_string_patterns(string_original: str, pattern: str, replacement: str) -> str:
     """
     Substitui uma correspondência de expressão regular.
 
@@ -57,7 +58,7 @@ def replace_string_patterns(string_original, pattern, replacement):
     return re.sub(pattern, replacement, json.dumps(string_original))
 
 
-def force_known_error_message(task_azure):
+def force_known_error_message(task_azure: str) -> None:
     """
     Indica que o teste possui um erro que já é conhecido e que o mesmo já possui um card aberto.
 
