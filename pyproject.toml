@@ -16,13 +16,24 @@ classifiers = [
     "Topic :: Software Development :: Quality Assurance",
 ]
 dependencies = [
-    "requests",          # Base para os futuros API Clients
-    "pydantic",          # Para os Models e validação de contratos (PEP 589)
-    "faker",             # Para geração de massa de dados randômica
-    "mimesis",           # Para geração de dados aleatórios localizados
-    "python-dotenv",     # Para gerenciar variáveis de ambiente (.env)
+    "requests>=2.31.0,<3.0.0",          # Base para os futuros API Clients
+    "pydantic>=2.0.0,<3.0.0",          # Para os Models e validação de contratos (PEP 589)
+    "email-validator>=2.0.0,<3.0.0",   # Requerido para EmailStr no Pydantic v2
+    "faker>=20.0.0,<26.0.0",             # Para geração de massa de dados randômica
+    "mimesis>=13.0.0,<15.0.0",           # Para geração de dados aleatórios localizados
+    "python-dotenv>=1.0.0,<2.0.0",     # Para gerenciar variáveis de ambiente (.env)
+    "pytz>=2023.3,<2025.0",            # Para manipulação de timezones em utils
 ]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["sdet_python_automation_core*"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0,<8.0.0",
+    "pytest-cov>=4.1.0,<5.0.0",
+    "black>=23.0.0,<25.0.0",
+    "ruff>=0.1.0,<1.0.0",
+    "mypy>=1.5.0,<2.0.0",
+]

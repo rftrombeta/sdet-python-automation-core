@@ -16,24 +16,25 @@ graph LR
     subgraph "Infraestrutura (Python Core)"
         A[Models / Pydantic]
         B[Generators / Faker]
-        C[Builders]
         D[Utils]
+        E[URLs]
     end
 
     subgraph "Clientes (Projetos de Teste)"
-        E[Robot Framework]
-        F[Python Tests]
-        G[Outros Clientes]
+        F[Robot Framework]
+        G[Python Tests]
+        H[Outros Clientes]
     end
 
-    E -.->|Usa| A
-    E -.->|Usa| B
-    E -.->|Usa| C
     F -.->|Usa| A
     F -.->|Usa| B
     F -.->|Usa| D
     G -.->|Usa| A
     G -.->|Usa| B
+    G -.->|Usa| D
+    G -.->|Usa| E
+    H -.->|Usa| A
+    H -.->|Usa| B
 ```
 
 ## 📁 Estrutura do Projeto
@@ -43,17 +44,13 @@ sdet-python-automation-core/
 ├── src/
 │   └── sdet_python_automation_core/    # Pacote principal da biblioteca
 │       ├── models/                      # Definições de Schemas (Pydantic Models)
-│       │   ├── build/                   # Builders para criação de payloads
-│       │   │   ├── build_login.py       # Builder para payloads de login
-│       │   │   ├── build_produtos.py    # Builder para payloads de produto
-│       │   │   └── build_usuarios.py    # Builder para payloads de usuário
-│       │   ├── dict/                    # Dicionários de dados de referência
-│       │   │   ├── dictionary_login.py  # Dados padrão para login
-│       │   │   ├── dictionary_produtos.py  # Dados padrão para produtos
-│       │   │   └── dictionary_usuarios.py  # Dados padrão para usuários
-│       │   ├── login.py                 # Model Pydantic para Login
-│       │   ├── produtos.py              # Model Pydantic para Produtos
-│       │   └── usuarios.py              # Model Pydantic para Usuários
+│       │   ├── schemas/                 # Models Pydantic para validação
+│       │   │   ├── login_schema.py      # LoginRequest (Pydantic Model)
+│       │   │   ├── usuario_schema.py    # UsuarioRequest (Pydantic Model)
+│       │   │   └── produto_schema.py    # ProdutoRequest (Pydantic Model)
+│       │   ├── login.py                 # Factory para criação de payloads de login
+│       │   ├── produtos.py              # Factory para criação de payloads de produto
+│       │   └── usuarios.py              # Factory para criação de payloads de usuário
 │       ├── generators/                  # Geradores de dados
 │       │   ├── generate_cnpj_cpf.py     # Geração de CPF/CNPJ válidos
 │       │   ├── generate_date.py         # Geração de datas formatadas
@@ -139,7 +136,7 @@ from sdet_python_automation_core.models import usuarios, login, produtos
 # Gerar payload de usuário
 payload_usuario = usuarios.create_payload_usuario()
 print(payload_usuario)
-# Output: {'nome': 'Maria Silva', 'email': 'maria@example.com', 'password': 'senha123', 'administrador': 'false'}
+# Output: {'nome': 'Maria Silva', 'email': 'maria@example.com', 'password': 'senha123', 'administrador': False}
 
 # Gerar payload de login
 payload_login = login.create_payload_login()
@@ -174,24 +171,25 @@ graph LR
     subgraph "Infraestrutura (Python Core)"
         A[Models / Pydantic]
         B[Generators / Faker]
-        C[Builders]
         D[Utils]
+        E[URLs]
     end
 
     subgraph "Clientes (Projetos de Teste)"
-        E[Robot Framework]
-        F[Python Tests]
-        G[Outros Clientes]
+        F[Robot Framework]
+        G[Python Tests]
+        H[Outros Clientes]
     end
 
-    E -.->|Usa| A
-    E -.->|Usa| B
-    E -.->|Usa| C
     F -.->|Usa| A
     F -.->|Usa| B
     F -.->|Usa| D
     G -.->|Usa| A
     G -.->|Usa| B
+    G -.->|Usa| D
+    G -.->|Usa| E
+    H -.->|Usa| A
+    H -.->|Usa| B
 ```
 
 ## 📁 Estrutura do Projeto
@@ -201,17 +199,13 @@ sdet-python-automation-core/
 ├── src/
 │   └── sdet_python_automation_core/    # Pacote principal da biblioteca
 │       ├── models/                      # Definições de Schemas (Pydantic Models)
-│       │   ├── build/                   # Builders para criação de payloads
-│       │   │   ├── build_login.py       # Builder para payloads de login
-│       │   │   ├── build_produtos.py    # Builder para payloads de produto
-│       │   │   └── build_usuarios.py    # Builder para payloads de usuário
-│       │   ├── dict/                    # Dicionários de dados de referência
-│       │   │   ├── dictionary_login.py  # Dados padrão para login
-│       │   │   ├── dictionary_produtos.py  # Dados padrão para produtos
-│       │   │   └── dictionary_usuarios.py  # Dados padrão para usuários
-│       │   ├── login.py                 # Model Pydantic para Login
-│       │   ├── produtos.py              # Model Pydantic para Produtos
-│       │   └── usuarios.py              # Model Pydantic para Usuários
+│       │   ├── schemas/                 # Models Pydantic para validação
+│       │   │   ├── login_schema.py      # LoginRequest (Pydantic Model)
+│       │   │   ├── usuario_schema.py    # UsuarioRequest (Pydantic Model)
+│       │   │   └── produto_schema.py    # ProdutoRequest (Pydantic Model)
+│       │   ├── login.py                 # Factory para criação de payloads de login
+│       │   ├── produtos.py              # Factory para criação de payloads de produto
+│       │   └── usuarios.py              # Factory para criação de payloads de usuário
 │       ├── generators/                  # Geradores de dados
 │       │   ├── generate_cnpj_cpf.py     # Geração de CPF/CNPJ válidos
 │       │   ├── generate_date.py         # Geração de datas formatadas
@@ -297,7 +291,7 @@ from sdet_python_automation_core.models import usuarios, login, produtos
 # Gerar payload de usuário
 payload_usuario = usuarios.create_payload_usuario()
 print(payload_usuario)
-# Output: {'nome': 'Maria Silva', 'email': 'maria@example.com', 'password': 'senha123', 'administrador': 'false'}
+# Output: {'nome': 'Maria Silva', 'email': 'maria@example.com', 'password': 'senha123', 'administrador': False}
 
 # Gerar payload de login
 payload_login = login.create_payload_login()
@@ -315,92 +309,6 @@ from sdet_python_automation_core.generators.generate_random import (
     generate_identifier_code_random,
     generate_identifier_reference,
     generate_uuid4,
-    generate_num_ref
-)
-from sdet_python_automation_core.generators.generate_cnpj_cpf import (
-    generate_cpf,
-    generate_cnpj
-)
-from sdet_python_automation_core.generators.generate_date import (
-    generate_current_date,
-    generate_date_plus_n_days,
-    generate_randon_date
-)
-
-# Gerar código identificador de 6 dígitos
-codigo = generate_identifier_code_random(6)
-print(codigo)  # Output: '123456'
-
-# Gerar referência alfanumérica
-referencia = generate_identifier_reference("TEST")
-print(referencia)  # Output: 'TEST-1234-ABC'
-
-# Gerar UUID v4
-uuid = generate_uuid4()
-print(uuid)  # Output: '550e8400-e29b-41d4-a716-446655440000'
-
-# Gerar número de referência
-num_ref = generate_num_ref()
-print(num_ref)  # Output: '1234567890'
-
-# Gerar CPF válido
-cpf = generate_cpf()
-print(cpf)  # Output: '12345678901'
-
-# Gerar CNPJ válido
-cnpj = generate_cnpj()
-print(cnpj)  # Output: '12345678000190'
-
-# Gerar data atual
-data_atual = generate_current_date()
-print(data_atual)  # Output: '2024-03-15'
-
-# Gerar data futura (+30 dias)
-data_futura = generate_date_plus_n_days(30)
-print(data_futura)  # Output: '2024-04-14'
-
-# Gerar data aleatória
-data_aleatoria = generate_randon_date("yyyy-mm-dd")
-print(data_aleatoria)  # Output: '2025-07-23'
-```
-
-### Gerenciando URLs de API
-
-```python
-from sdet_python_automation_core.url.url_api import get_url_api
-
-# Obter URL da API conforme ambiente
-api_url = get_url_api()
-print(api_url)  # Output: 'https://serverest.dev/#/'
-```
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Para contribuir com o projeto:
-
-1. Faça um fork do repositório
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-funcionalidade`)
-3. Faça commit de suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/nova-funcionalidade`)
-5. Abra um Pull Request
-
-### Diretrizes
-
-- Mantenha o código limpo e bem documentado
-- Adicione docstrings para novas funções/classes
-- Siga o padrão de nomenclatura existente
-- Teste suas mudanças antes de submeter o PR
-
-## 👨‍💻 Autor
-
-**Rodrigo Trombeta** - [LinkedIn](https://linkedin.com/in/rodrigotrombeta) | [Portfólio](https://rftrombeta.github.io/)
-
----
-
-## 📄 Licença
-
-Este projeto está sob licença. Veja o arquivo de licença para mais detalhes.
-
     generate_num_ref
 )
 from sdet_python_automation_core.generators.generate_cnpj_cpf import (

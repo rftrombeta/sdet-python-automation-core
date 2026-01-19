@@ -32,6 +32,8 @@ class UsuarioRequest(BaseModel):
         """
         if isinstance(v, str):
             return v.lower() in ('true', '1', 'yes')
+        if v is None:
+            return False
         return bool(v)
 
     @classmethod
