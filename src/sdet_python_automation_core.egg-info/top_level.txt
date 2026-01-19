@@ -1,1 +1,1 @@
-automation_core
+sdet_python_automation_core

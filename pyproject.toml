@@ -24,4 +24,4 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["automation_core*"]
+include = ["sdet_python_automation_core*"]
