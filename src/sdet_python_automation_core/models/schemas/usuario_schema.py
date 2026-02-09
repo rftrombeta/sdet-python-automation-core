@@ -16,25 +16,27 @@ class UsuarioRequest(BaseModel):
 
     @field_validator('administrador', mode='before')
     @classmethod
-    def validate_administrador(cls, v: Any) -> bool:
+    def validate_administrador(cls, v: Any) -> str:
         """
-        Converte string "true"/"false" para boolean se necessário.
-        
-        Parameters
-        ----------
-        v : Any
-            Valor a ser validado
-            
-        Returns
-        -------
-        bool
-            Valor boolean
+        Converte valores para as strings "true" ou "false".
+
+        Aceita entradas em string (como "true"/"false", "1"/"0", "yes"/"no"),
+        valores booleanos e None. Retorna sempre uma string compatível com a API.
         """
+        true_vals = ('true', '1', 'yes')
+        false_vals = ('false', '0', 'no')
+
         if isinstance(v, str):
-            return v.lower() in ('true', '1', 'yes')
+            s = v.strip().lower()
+            if s in true_vals:
+                return 'true'
+            if s in false_vals:
+                return 'false'
+            # não reconhecido: mantém a string original (não altera)
+            return v
         if v is None:
-            return False
-        return bool(v)
+            return 'false'
+        return 'true' if bool(v) else 'false'
 
     @classmethod
     def generate(cls, administrador: str = "false") -> "UsuarioRequest":
