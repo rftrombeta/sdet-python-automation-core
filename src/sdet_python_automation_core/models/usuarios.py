@@ -2,14 +2,14 @@ from typing import Dict, Any
 from .schemas.usuario_schema import UsuarioRequest
 
 
-def create_payload_usuario(administrador: bool = False) -> Dict[str, Any]:
+def create_payload_usuario(administrador: str = "false") -> Dict[str, Any]:
     """
     Cria o payload padrão para geração de usuário.
     
     Parameters
     ----------
-    administrador : bool, optional
-        Define se o usuário será administrador (padrão: False)
+    administrador : string, optional
+        Define se o usuário será administrador. Enviar 'true' ou 'false'. (padrão: false)
         
     Returns
     -------
