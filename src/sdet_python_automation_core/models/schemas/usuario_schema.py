@@ -12,7 +12,7 @@ class UsuarioRequest(BaseModel):
     nome: str = Field(..., min_length=1, description="Nome do usuário")
     email: EmailStr = Field(..., description="Email do usuário")
     password: str = Field(..., min_length=1, description="Senha do usuário")
-    administrador: bool = Field(default=False, description="Indica se o usuário é administrador")
+    administrador: str = Field(default="false", description="Indica se o usuário é administrador")
 
     @field_validator('administrador', mode='before')
     @classmethod
@@ -37,14 +37,14 @@ class UsuarioRequest(BaseModel):
         return bool(v)
 
     @classmethod
-    def generate(cls, administrador: bool = False) -> "UsuarioRequest":
+    def generate(cls, administrador: str = "false") -> "UsuarioRequest":
         """
         Gera uma instância de UsuarioRequest com dados aleatórios.
         
         Parameters
         ----------
-        administrador : bool, optional
-            Define se o usuário será administrador (padrão: False)
+        administrador : string, optional
+            Define se o usuário será administrador. Enviar 'true' ou 'false'. (padrão: false)
             
         Returns
         -------
